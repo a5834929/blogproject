@@ -9,9 +9,9 @@
 (defn counter-component [counter-key]
       (r/create-class
         {:component-will-mount 
-           (if counter-key
-               #(cntr/get-share-counter counter-key)
-               #(cntr/get-counter))
+          (if counter-key
+              #(cntr/get-share-counter counter-key)
+              #(cntr/get-counter))
          
          :reagent-render 
           (fn []

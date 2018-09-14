@@ -11,7 +11,7 @@
       (let [{:keys [id]} route-params
             parsed-id (try (Integer/parseInt id)
                       (catch NumberFormatException e -1))]
-           (if-let [counter (sql/counter-by-id sql/dbspec {:id parsed-id})]
+           (if-let [counter (sql/counter-by-id {:id parsed-id})]
                    {:status 200
                     :body (public-view counter)}
                    {:status 404})))
@@ -22,15 +22,15 @@
                            (catch NumberFormatException e -1))
             parsed-new-val (try (Integer/parseInt new-val)
                            (catch NumberFormatException e -1))]
-           (let [counter (sql/update-counter-by-id sql/dbspec {:id parsed-id 
-                                                               :new-val parsed-new-val})]
+           (let [counter (sql/update-counter-by-id {:id parsed-id 
+                                                    :new-val parsed-new-val})]
                    {:status 200
                     :body (public-view counter)})))
 
 (defn get-share-counter [{:keys [route-params]}]
       (let [{:keys [share-key]} route-params
             parsed-share-key (java.util.UUID/fromString share-key)]
-            (if-let [counter (sql/counter-by-share-key sql/dbspec {:share-key parsed-share-key})]
+            (if-let [counter (sql/counter-by-share-key {:share-key parsed-share-key})]
                     {:status 200
                      :body (public-view counter)}
                     {:status 404})))

@@ -10,7 +10,7 @@
           (s/rename-keys {:article-id :id :date-added :date})))
 
 (defn blog-entries [req]
-      (let [articles (sql/all-articles sql/dbspec)]
+      (let [articles (sql/all-articles)]
            {:status 200
             :body   (map public-view articles)}))
 
@@ -18,7 +18,7 @@
       (let [{:keys [id]} route-params
             parsed-id (try (Long/parseLong id)
                            (catch NumberFormatException e -1))]
-           (if-let [article (sql/article-by-id sql/dbspec {:id parsed-id})]
+           (if-let [article (sql/article-by-id {:id parsed-id})]
                    {:status 200
                     :body (merge (public-view article) (a/get-full-name (:user-id article)))}
                    {:status 404})))
@@ -27,7 +27,7 @@
       (let [{:keys [user-id title content]} body
             parsed-user-id (java.util.UUID/fromString user-id)]
             (if (and (u/not-blank? title) (u/not-blank? content))
-              (let [article (sql/insert-article sql/dbspec {:user-id parsed-user-id
+              (let [article (sql/insert-article {:user-id parsed-user-id
                                                             :title title
                                                             :content content})]
                     {:status 200
@@ -38,6 +38,6 @@
       (let [{:keys [id]} route-params
             parsed-id (try (Long/parseLong id)
                            (catch NumberFormatException e -1))]
-           (sql/delete-article sql/dbspec {:id parsed-id})
+           (sql/delete-article {:id parsed-id})
            {:status 200}))
 
