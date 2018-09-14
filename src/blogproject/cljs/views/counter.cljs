@@ -6,10 +6,17 @@
             [blogproject.cljs.controllers.counter :as cntr]
             [reagent.core :as r]))
 
-(defn counter-component []
+(defn counter-component1 [counter-key]
+      (if counter-key
+          [:div counter-key]
+          [:div "no key"]))
+
+(defn counter-component [counter-key]
       (r/create-class
         {:component-will-mount 
-          cntr/get-counter
+           (if counter-key
+               #(cntr/get-share-counter counter-key)
+               #(cntr/get-counter))
          
          :reagent-render 
           (fn []
@@ -25,12 +32,14 @@
                  (fn [e]
                      (.preventDefault e)
                      (cntr/decrement id value))]]
-               [:p.pv2.tc "Share this link so your friends can update your counter!"]
-               [:h5.shadow-1.ph3.pv3.gray.tc "http://127.0.0.1:8080/counter?share_key="share-key]]))}))
+               (if-not counter-key
+                [:div
+                 [:p.pv2.tc "Share this link so your friends can update your counter!"]
+                 [:h5.shadow-1.ph3.pv3.gray.tc "http://127.0.0.1:8080/counter?share-key="share-key]])]))}))
 
-(defn counter []
+(defn counter [{:keys [route-params query-params]}]
       [:div.mw7.pv3.ph5.center.flex.flex-column
        [:h1 "Counter"]
-       (if @s/session
-        [counter-component]
-        "Sign up and get your own counter!")])
+       (cond (contains? query-params :share-key) [counter-component (:share-key query-params)]
+             @s/session [counter-component]
+             :else "Sign up and get your own counter!")])

@@ -4,14 +4,18 @@
             [blogproject.cljs.models.counter :as m]
             [blogproject.cljs.models.session :as s]))
 
+(defn get-share-counter [share-key]
+      (.log js/console "controllers share-key "share-key)
+      (reset! m/counter-value nil)
+      (xhr/send-get
+        (routes/api :get-share-counter :share-key share-key)
+        :success-atom m/counter-value))
+
 (defn get-counter []
       (reset! m/counter-value nil)
       (if @s/session
           (xhr/send-get
             (routes/api :get-counter :id (:counter-id @s/session))
-            :success-atom m/counter-value)
-          (xhr/send-get
-            (routes/api :get-counter :id 0)
             :success-atom m/counter-value)))
 
 (defn increment [id value]

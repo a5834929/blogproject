@@ -26,3 +26,11 @@
                                                                :new-val parsed-new-val})]
                    {:status 200
                     :body (public-view counter)})))
+
+(defn get-share-counter [{:keys [route-params]}]
+      (let [{:keys [share-key]} route-params
+            parsed-share-key (java.util.UUID/fromString share-key)]
+            (if-let [counter (sql/counter-by-share-key sql/dbspec {:share-key parsed-share-key})]
+                    {:status 200
+                     :body (public-view counter)}
+                    {:status 404})))

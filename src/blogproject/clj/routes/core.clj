@@ -3,6 +3,7 @@
             [ring.middleware.file :as file]
             [ring.middleware.content-type :as ct]
             [ring.middleware.resource :as resource]
+            [ring.middleware.params :as params]
             [blogproject.clj.roles.core :as roles]
             [blogproject.clj.utils.core :as u]
             [blogproject.clj.routes.middleware :as middleware]
@@ -27,6 +28,7 @@
    :new-blog blog/new-blog
    :delete-blog-entry blog/delete-blog-entry
    :get-counter counter/get-counter
+   :get-share-counter counter/get-share-counter
    :update-counter counter/update-counter})
 
 (defn page-handler [request handler-name]
@@ -61,6 +63,7 @@
   (-> routes
       (middleware/wrap-bidi routing/page-routes page-handler)
       (middleware/wrap-bidi routing/api-routes api-view)
+      (params/wrap-params)
       (json/wrap-json-response)
       (json/wrap-json-body {:keywords? true})
       (roles/wrap-security)

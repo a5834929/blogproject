@@ -14,6 +14,11 @@ where counter_id = :id;
 select * from counters
 where user_id = :user-id;
 
+-- :name counter-by-share-key
+-- :result :one
+select * from counters
+where share_key = :share-key;
+
 -- :name all-counters
 select * from counters
 order by counter_id asc;
