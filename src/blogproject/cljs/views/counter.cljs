@@ -6,11 +6,6 @@
             [blogproject.cljs.controllers.counter :as cntr]
             [reagent.core :as r]))
 
-(defn counter-component1 [counter-key]
-      (if counter-key
-          [:div counter-key]
-          [:div "no key"]))
-
 (defn counter-component [counter-key]
       (r/create-class
         {:component-will-mount 

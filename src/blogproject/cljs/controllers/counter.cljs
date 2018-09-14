@@ -5,7 +5,6 @@
             [blogproject.cljs.models.session :as s]))
 
 (defn get-share-counter [share-key]
-      (.log js/console "controllers share-key "share-key)
       (reset! m/counter-value nil)
       (xhr/send-get
         (routes/api :get-share-counter :share-key share-key)
