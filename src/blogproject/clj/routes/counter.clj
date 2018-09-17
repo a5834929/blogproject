@@ -16,16 +16,11 @@
                     :body (public-view counter)}
                    {:status 404})))
 
-(defn update-counter [{:keys [route-params]}]
-      (let [{:keys [id new-val]} route-params
-            parsed-id (try (Integer/parseInt id)
-                           (catch NumberFormatException e -1))
-            parsed-new-val (try (Integer/parseInt new-val)
-                           (catch NumberFormatException e -1))]
-           (let [counter (sql/update-counter-by-id {:id parsed-id 
-                                                    :new-val parsed-new-val})]
-                   {:status 200
-                    :body (public-view counter)})))
+(defn update-counter [{:keys [body]}]
+      (let [{:keys [id change]} body]
+           (let [counter (sql/update-counter-by-id {:id id :change change})]
+                {:status 200
+                 :body (public-view counter)})))
 
 (defn get-share-counter [{:keys [route-params]}]
       (let [{:keys [share-key]} route-params

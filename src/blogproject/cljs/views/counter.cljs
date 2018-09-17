@@ -21,13 +21,13 @@
                 [c/button "Increment"
                  (fn [e]
                      (.preventDefault e)
-                     (cntr/increment id value))]
+                     (cntr/increment id))]
                 [:span "The current value is " value "."]
                 [c/button "Decrement"
                  (fn [e]
                      (.preventDefault e)
-                     (cntr/decrement id value))]]
-               (if-not counter-key
+                     (cntr/decrement id))]]
+               (if (= id (:counter-id @s/session))
                 [:div
                  [:p.pv2.tc "Share this link so your friends can update your counter!"]
                  [:h5.shadow-1.ph3.pv3.gray.tc "http://127.0.0.1:8080/counter?share-key="share-key]])]))}))

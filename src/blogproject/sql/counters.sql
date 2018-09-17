@@ -27,5 +27,5 @@ order by counter_id asc;
 -- :command :returning-execute
 -- :result :one
 update counters
-set counter_value = :new-val
+set counter_value = counter_value + :change
 where counter_id = :id returning *;

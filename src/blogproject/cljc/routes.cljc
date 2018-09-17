@@ -28,7 +28,7 @@
             (u/context "/counter"
                        (u/GET ["/" :id] :get-counter)
                        (u/GET ["/share-key/" :share-key] :get-share-counter)
-                       (u/PUT ["/" :id "/update/" :new-val] :update-counter))))
+                       (u/PUT "/update" :update-counter))))
 
 (def page (partial bidi/path-for page-routes))
 (def api (partial bidi/path-for api-routes))

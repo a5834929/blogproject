@@ -17,12 +17,14 @@
             (routes/api :get-counter :id (:counter-id @s/session))
             :success-atom m/counter-value)))
 
-(defn increment [id value]
+(defn increment [id]
       (xhr/send-put
-        (routes/api :update-counter :id id :new-val (inc value))
+        (routes/api :update-counter)
+        :data {:id id :change 1}
         :success-atom m/counter-value))
 
-(defn decrement [id value]
+(defn decrement [id]
       (xhr/send-put
-        (routes/api :update-counter :id id :new-val (dec value))
+        (routes/api :update-counter)
+        :data {:id id :change -1}
         :success-atom m/counter-value))
