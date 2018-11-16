@@ -6,8 +6,8 @@
   :min-lein-version "2.7.1"
   :profiles {:dev [:project/dev :profiles/dev]
              :test [:project/test :profiles/test]
-             :uberjar {:main blogproject.clj.core :aot :all
-                       :auto-clean false}
+             :uberjar {:main blogproject.clj.core :aot :all}
+                       ; :auto-clean false}
              ;; only edit :profiles/* in profiles.clj
              :profiles/dev  {}
              :profiles/test {}
@@ -16,7 +16,8 @@
              :project/test {}}
   :aliases {"brevity" ["run" "-m" "brevity.core/handle-commands" :project/main]}
   :resource-paths ["resources"]
-  :main ^:skip-aot blogproject.clj.core
+  :main blogproject.clj.core
+  :uberjar-name "blogproject-standalone.jar"
   :dependencies [[org.clojure/clojure "LATEST"]
                  [org.immutant/web "LATEST"]
                  [ring/ring-core "LATEST"]
