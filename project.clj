@@ -7,12 +7,17 @@
   :profiles {:dev [:project/dev :profiles/dev]
              :test [:project/test :profiles/test]
              :uberjar {:main blogproject.clj.core :aot :all}
-                       ; :auto-clean false}
+             ; :auto-clean false}
              ;; only edit :profiles/* in profiles.clj
              :profiles/dev  {}
              :profiles/test {}
              :project/dev {:source-paths ["src" "tool-src"]
-                           :plugins [[lein-auto "LATEST"]]}
+                           :plugins [[lein-auto "LATEST"]]
+                           :dependencies [[cider/piggieback "0.3.1"]
+                                          [figwheel-sidecar "0.5.16"]
+                                          [ring/ring-jetty-adapter "1.4.0"]
+                                          [etaoin "0.2.8-SNAPSHOT"]]
+                           :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
              :project/test {}}
   :aliases {"brevity" ["run" "-m" "brevity.core/handle-commands" :project/main]}
   :resource-paths ["resources"]
