@@ -1,4 +1,3 @@
 .lein-*
-target/
+/target
 .nrepl*
-target/
