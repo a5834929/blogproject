@@ -6,8 +6,7 @@
             [blogproject.cljc.routes :as routes]
             [blogproject.cljs.controllers.core :as controllers]
             [blogproject.cljs.views.core :as views]
-            [goog.Uri])
-  )
+            [goog.Uri]))
 
 (enable-console-print!)
 
