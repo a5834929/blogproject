@@ -1,4 +1,3 @@
-resources/
 .lein-*
 target/
 .nrepl*
