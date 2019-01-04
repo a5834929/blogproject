@@ -1,1 +1,0 @@
-{"version":3,"file":"\/Users\/andrewlin\/brevity\/blogproject\/resources\/public\/js\/development\/blogproject\/cljs\/models\/session.js","sources":["session.cljs"],"lineCount":7,"mappings":";AAAA;;;AAGA,AAAKA,0CAAQ,4BAAA,5BAACC","names":["blogproject.cljs.models.session\/session","reagent.core\/atom"]}

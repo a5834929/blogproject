@@ -1,3 +1,5 @@
 .lein-*
 /target
 .nrepl*
+/resources
+*.swp
