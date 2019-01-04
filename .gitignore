@@ -1,5 +1,6 @@
 .lein-*
 /target
 .nrepl*
-/resources
+/resources/private
+/resources/public/js
 *.swp
