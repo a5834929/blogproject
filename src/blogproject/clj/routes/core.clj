@@ -54,7 +54,6 @@
                         :body {:errors errors}}))))
 
 (r/defroutes routes
-             (route/resources "/")
              (route/not-found {:status  404
                                :headers {"Content-Type" "text/html"}
                                :body    views/index}))
@@ -63,6 +62,7 @@
   (-> routes
       (middleware/wrap-bidi routing/page-routes page-handler)
       (middleware/wrap-bidi routing/api-routes api-view)
+      (resource/wrap-resource "public")
       (params/wrap-params)
       (json/wrap-json-response)
       (json/wrap-json-body {:keywords? true})
