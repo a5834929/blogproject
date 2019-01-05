@@ -56,6 +56,7 @@
 (r/defroutes routes
              ;;; This doesn't work for some reason...
              ;(route/files "resources/public")
+             (route/resources "/")
              (route/not-found {:status  404
                                :headers {"Content-Type" "text/html"}
                                :body    views/index}))
@@ -64,7 +65,7 @@
   (-> routes
       (middleware/wrap-bidi routing/page-routes page-handler)
       (middleware/wrap-bidi routing/api-routes api-view)
-      (file/wrap-file "resources/public" {:index-files? false})
+      ;(file/wrap-file "resources/public" {:index-files? false})
       (params/wrap-params)
       (json/wrap-json-response)
       (json/wrap-json-body {:keywords? true})
