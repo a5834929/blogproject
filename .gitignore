@@ -3,4 +3,5 @@
 .nrepl*
 /resources/private
 /resources/public/js
+profiles.clj
 *.swp
