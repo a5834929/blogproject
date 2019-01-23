@@ -24,7 +24,7 @@
                  [ring/ring-devel "LATEST"]
                  [ring/ring-json "LATEST"]
                  [compojure "LATEST"]
-                 [com.opentable.components/otj-pg-embedded "LATEST"]
+                 [com.opentable.components/otj-pg-embedded "0.12.6"]
                  [migratus "LATEST"]
                  [com.layerware/hugsql "LATEST"]
                  [hugsql-adapter-case "LATEST"]
