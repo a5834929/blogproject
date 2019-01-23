@@ -4,8 +4,7 @@
             [hugsql.core :as hug]
             [hugsql-adapter-case.adapters :as adapters]
             [conman.core :as conman])
-  (:import [com.opentable.db.postgres.embedded EmbeddedPostgres]
-           [java.io File]))
+  (:import [java.io File]))
 
 (def dbspec (environ/env :database-url))
 
@@ -16,7 +15,7 @@
 (conman/bind-connection dbspec "blogproject/sql/counters.sql")
 
 (defn init! []
-      (let [dev-mode? (= "true" (environ/env :dev-database))]
+      #_(let [dev-mode? (= "true" (environ/env :dev-database))]
            (when dev-mode?
                  (let [db-port (Integer/parseInt (environ/env :dev-database-port))
                        db (-> (EmbeddedPostgres/builder)

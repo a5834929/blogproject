@@ -4,8 +4,7 @@
             [blogproject.clj.utils.core :as u]
             [blogproject.clj.models.sql :as sql]
             [environ.core :as environ]
-            [immutant.web :as server])
-  (:import [com.opentable.db.postgres.embedded EmbeddedPostgres]))
+            [immutant.web :as server]))
 
 (def host (environ/env :host))
 (def port (environ/env :port))
