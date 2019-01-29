@@ -7,8 +7,7 @@
             [immutant.web :as server]))
 
 (def host (environ/env :host))
-(def port 5000)
-; (def port (environ/env :port))
+(def port (environ/env :port))
 
 (defn -main [& args]
   (sql/init!)
